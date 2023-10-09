@@ -5,7 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-public class MenuItem {
+public class MenuItem{
     private String name;
     private double price;
     private double weightOrValue;

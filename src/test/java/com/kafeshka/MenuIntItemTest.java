@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MenuItemTest {
+class MenuIntItemTest {
     @Test
     void testMenuItem() {
         MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000);
