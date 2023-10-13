@@ -1,9 +1,16 @@
 package com.kafeshka;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
 public class Order {
     private List<MenuItem> items;
     private double totalAmount;
@@ -19,21 +26,7 @@ public class Order {
     private Discount discount;
     private PaymentMethod paymentMethod;
 
-    public Order(List<MenuItem> items, double totalAmount, double tips, String orderComments, Date orderDate, boolean delivery, Date deliveryTime, String deliveryAddress, int orderID, Customer customer, OrderStatus status, Discount discount, PaymentMethod paymentMethod) {
-        this.items = items;
-        this.totalAmount = totalAmount;
-        this.tips = tips;
-        this.orderComments = orderComments;
-        this.orderDate = orderDate;
-        this.delivery = delivery;
-        this.deliveryTime = deliveryTime;
-        this.deliveryAddress = deliveryAddress;
-        this.orderID = orderID;
-        this.customer = customer;
-        this.status = status;
-        this.discount = discount;
-        this.paymentMethod = paymentMethod;
-    }
-
-
 }
+
+
+

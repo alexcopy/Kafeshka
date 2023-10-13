@@ -1,14 +1,15 @@
 package com.kafeshka;
 
 import com.kafeshka.exception.OrderException;
+import com.sun.security.ntlm.Client;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderManager {
-    List<Order> orders;
+    private List<Order> orders;
 
-    public OrderManager(List<Order> orders) {
+    public OrderManager() {
         orders = new ArrayList<>();
     }
 
@@ -20,9 +21,19 @@ public class OrderManager {
     }
 
     public void cancelOrder(Order order) throws OrderException {
-        if (order == null || !orders.contains(order)){
-            throw new OrderException("Order is empty or order mot exists");
+        if (order == null || !orders.contains(order)) {
+            throw new OrderException("Order is empty or order not exists");
         }
         orders.remove(order);
+    }
+
+    public List<Order> getOrdersByCustomer(Customer customer) {
+        List<Order> customerOrders = new ArrayList<>();
+        for (Order order : this.orders) {
+            if (order.getCustomer().equals(customer)) {
+                customerOrders.add(order);
+            }
+        }
+        return customerOrders;
     }
 }
