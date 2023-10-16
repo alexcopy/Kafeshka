@@ -9,6 +9,7 @@ import java.util.List;
 public class OrderManager {
     private List<Order> orders;
 
+
     public OrderManager() {
         orders = new ArrayList<>();
     }
@@ -36,4 +37,11 @@ public class OrderManager {
         }
         return customerOrders;
     }
+    public void updateOrderStatus (Order order, OrderStatus newStatus) throws OrderException {
+        if (order == null || !orders.contains(order)) {
+            throw new OrderException("Order is empty or order not exists");
+        }
+        order.setStatus(newStatus);
+    }
+
 }
