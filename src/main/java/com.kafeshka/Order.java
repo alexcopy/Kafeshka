@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-
 public class Order {
     private List<MenuItem> items;
     private double totalAmount;
@@ -44,24 +43,13 @@ public class Order {
         this.paymentMethod = paymentMethod;
     }
 
-    public static void main(String[] args) {
-        Order order = new Order(
-                // new ArrayList<>(),
-                10.8,
-                //0.0,
-                "dfhgkjukl",
-                // new Date(),
-                true,
-                new Date(),
-                "dhrfdkuzfki",
-                //  UUID.randomUUID(),
-                new Customer(),
-                // OrderStatus.IN_PROGRESS,
-                new Discount(),
-                new PaymentMethod()
-        );
-        order.setTips(13.9);
-
+    public double calculateTotalAmount() {
+        double total = 0.0;
+        for (MenuItem item : items) {
+            total += item.getPrice();
+        }
+        this.setTotalAmount(total);
+        return total;
     }
 }
 
