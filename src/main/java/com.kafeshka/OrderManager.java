@@ -44,7 +44,7 @@ public class OrderManager {
         order.setStatus(newStatus);
     }
 
-    public List<Order> getOrders(Order order) {
+    public List<Order> getOrders() {
         return orders;
     }
 

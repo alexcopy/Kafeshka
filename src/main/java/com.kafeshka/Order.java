@@ -27,6 +27,11 @@ public class Order {
     private Discount discount;
     private PaymentMethod paymentMethod;
 
+    public Order(Customer customer,PaymentMethod paymentMethod) {
+        this.customer = customer;
+        this.paymentMethod = paymentMethod;
+    }
+
     public Order(double totalAmount, String orderComments, boolean delivery, Date deliveryTime, String deliveryAddress, Customer customer, Discount discount, PaymentMethod paymentMethod) {
         this.items = new ArrayList<>();
         this.totalAmount = totalAmount;
