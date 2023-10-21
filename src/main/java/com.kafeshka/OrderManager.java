@@ -3,10 +3,13 @@ package com.kafeshka;
 import com.kafeshka.exception.OrderException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderManager {
     private List<Order> orders;
+    private HashMap<MenuItem, Integer> hashmap;
 
 
     public OrderManager() {
@@ -48,8 +51,21 @@ public class OrderManager {
         return orders;
     }
 
-    public List<Order> getOrderHistory(Customer customer){
+    public List<Order> getOrderHistory(Customer customer) {
         return this.getOrdersByCustomer(customer);
+    }
+
+    public Map<MenuItem, Integer> getMostPopularMenuItem(int numberOfItems) {
+        Map<MenuItem, Integer> dishOrderCount = new HashMap<>();
+        for (Order order : orders) {
+            for (MenuItem item : order.getItems()) {
+                if (item instanceof MenuItem) {
+                    dishOrderCount.put(item, dishOrderCount.getOrDefault(item, 0) + 1);
+                }
+            }
+        }
+        return dishOrderCount;
+
     }
 }
 
