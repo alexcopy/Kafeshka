@@ -55,7 +55,7 @@ public class OrderManager {
         return this.getOrdersByCustomer(customer);
     }
 
-    public Map<MenuItem, Integer> getMostPopularMenuItem(int numberOfItems) {
+    public List<MenuItem> getMostPopularMenuItem(int numberOfItems) {
         Map<MenuItem, Integer> dishOrderCount = new HashMap<>();
         for (Order order : orders) {
             for (MenuItem item : order.getItems()) {
@@ -64,7 +64,9 @@ public class OrderManager {
                 }
             }
         }
-        return dishOrderCount;
+        List<MenuItem> mostPopularDishes = new ArrayList<>(dishOrderCount.keySet());
+        mostPopularDishes.sort((dish1,dish2) -> dishOrderCount.get(dish2)- dishOrderCount.get(dish1));
+        return mostPopularDishes.subList(0,Math.min(numberOfItems,mostPopularDishes.size()));
 
     }
 }

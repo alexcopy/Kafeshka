@@ -117,8 +117,8 @@ class OrderManagerTest {
         order2.setItems(items2);
         orderManager.placeOrder(order1);
         orderManager.placeOrder(order2);
-        Map<MenuItem, Integer> mostPopularMenuItem = orderManager.getMostPopularMenuItem(3);
-        //assertEquals("Pizza", mostPopularMenuItem.get(0).);
+        List<MenuItem> mostPopularMenuItem = orderManager.getMostPopularMenuItem(3);
+        assertEquals("Pizza", mostPopularMenuItem.get(0).getName());
 
     }
 }
