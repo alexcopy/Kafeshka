@@ -101,7 +101,7 @@ class OrderManagerTest {
         MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
         MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000);
         MenuItem menuItem3 = new MenuItem("Salad", 20, 20.4, "with Ananas", false, true, 2000);
-       // MenuItem menuItem4 = new MenuItem("Salad", 20, 20.4, "with Ananas", false, true, 2000);
+        // MenuItem menuItem4 = new MenuItem("Salad", 20, 20.4, "with Ananas", false, true, 2000);
         //MenuItem menuItem5 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
         //MenuItem menuItem6 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
         List<MenuItem> items1 = new ArrayList<>();
@@ -119,6 +119,29 @@ class OrderManagerTest {
         orderManager.placeOrder(order2);
         List<MenuItem> mostPopularMenuItem = orderManager.getMostPopularMenuItem(3);
         assertEquals("Pizza", mostPopularMenuItem.get(0).getName());
+    }
 
+    @Test
+    void testMeanReceipt() throws OrderException {
+        Order order1 = new Order(customer, paymentMethod);
+        Order order2 = new Order(customer, paymentMethod);
+        Order order3 = new Order(customer, paymentMethod);
+        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
+        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000);
+        MenuItem menuItem3 = new MenuItem("Salad", 60, 20.4, "with Ananas", false, true, 2000);
+        List<MenuItem> items1 = new ArrayList<>();
+        List<MenuItem> items2 = new ArrayList<>();
+        List<MenuItem> items3 = new ArrayList<>();
+        items1.add(menuItem1);
+        items2.add(menuItem2);
+        items3.add(menuItem3);
+        order1.setItems(items1);
+        order2.setItems(items2);
+        order3.setItems(items3);
+        orderManager.placeOrder(order1);
+        orderManager.placeOrder(order2);
+        orderManager.placeOrder(order3);
+        double meanReceipt = orderManager.getMeanReceipt();
+        assertEquals(40.0, meanReceipt, 0.001);
     }
 }
