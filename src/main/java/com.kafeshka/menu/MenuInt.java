@@ -1,4 +1,4 @@
-package com.kafeshka;
+package com.kafeshka.menu;
 
 import com.kafeshka.exception.MenuException;
 

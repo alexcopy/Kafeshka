@@ -1,7 +1,9 @@
-package com.kafeshka;
+package com.kafeshka.order;
 
 
-import lombok.AllArgsConstructor;
+import com.kafeshka.*;
+import com.kafeshka.discount.Discount;
+import com.kafeshka.menu.MenuItem;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,15 +26,15 @@ public class Order {
     private UUID orderID;
     private Customer customer;
     private OrderStatus status;
-    private Discount discount;
+    private double discount;
     private PaymentMethod paymentMethod;
 
-    public Order(Customer customer,PaymentMethod paymentMethod) {
+    public Order(Customer customer, PaymentMethod paymentMethod) {
         this.customer = customer;
         this.paymentMethod = paymentMethod;
     }
 
-    public Order(double totalAmount, String orderComments, boolean delivery, Date deliveryTime, String deliveryAddress, Customer customer, Discount discount, PaymentMethod paymentMethod) {
+    public Order(double totalAmount, String orderComments, boolean delivery, Date deliveryTime, String deliveryAddress, Customer customer, double discount, PaymentMethod paymentMethod) {
         this.items = new ArrayList<>();
         this.totalAmount = totalAmount;
         this.tips = 0.0;
@@ -55,6 +57,18 @@ public class Order {
         }
         this.setTotalAmount(total);
         return total;
+    }
+
+    public void applyDiscount(double discountAmount) {
+        if (discountAmount >= 0) {
+            this.setDiscount(discountAmount);
+        } else {
+            throw new IllegalArgumentException("Amount should be positive number");
+        }
+    }
+
+    public void removeDiscount() {
+        this.setDiscount(0);
     }
 }
 

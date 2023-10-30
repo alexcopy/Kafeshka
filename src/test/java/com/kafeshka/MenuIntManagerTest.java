@@ -1,6 +1,8 @@
 package com.kafeshka;
 
 import com.kafeshka.exception.MenuException;
+import com.kafeshka.menu.MenuItem;
+import com.kafeshka.menu.MenuManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
