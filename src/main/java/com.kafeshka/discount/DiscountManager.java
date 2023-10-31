@@ -2,15 +2,22 @@ package com.kafeshka.discount;
 
 import com.kafeshka.order.Order;
 import com.kafeshka.order.OrderManager;
+import com.opencsv.bean.util.OrderedObject;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class DiscountManager {
     private List<Discount> availableDiscounts;
 
     public DiscountManager(List<Discount> availableDiscounts) {
         this.availableDiscounts = availableDiscounts;
+    }
+
+    public List<Discount> getAvailableDiscounts() {
+        return availableDiscounts;
     }
 
     public void applyDiscountToOrder(Order order, Discount discount) {
@@ -20,8 +27,20 @@ public class DiscountManager {
         } else {
             throw new IllegalArgumentException("Discount is not available");
         }
-
     }
+
+    public void applyCumulativeDiscount(Order order, Discount discount) {
+        if (availableDiscounts.contains(discount)) {
+            double existDiscount = order.getDiscount();
+            double finalDiscount = existDiscount + discount.getDiscountAmount();
+            Discount totalDiscount = new Discount("CumulativeDiscount", finalDiscount);
+            double cumulativeAmountDiscount = calculateDiscountAmount(order, totalDiscount);
+            order.applyDiscount(cumulativeAmountDiscount);
+        } else {
+            throw new IllegalArgumentException("Discount is not available");
+        }
+    }
+
 
     private double calculateDiscountAmount(Order order, Discount discount) {
         double discountPercentage = discount.getDiscountAmount() / 100.0;
@@ -29,12 +48,12 @@ public class DiscountManager {
 
     }
 
-    public void removeDiscountFromOrder (Order order){
+    public void removeDiscountFromOrder(Order order) {
         order.removeDiscount();
     }
 
-    public void addedDiscount( Discount existingDiscount, String newName, double newDiscountAmount){
-        if ( availableDiscounts.contains(existingDiscount)){
+    public void editDiscount(Discount existingDiscount, String newName, double newDiscountAmount) {
+        if (availableDiscounts.contains(existingDiscount)) {
             existingDiscount.setName(newName);
             existingDiscount.setDiscountAmount(newDiscountAmount);
         } else {

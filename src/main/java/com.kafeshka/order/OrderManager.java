@@ -77,14 +77,14 @@ public class OrderManager {
 
     public double getMeanReceipt() {
         double totalAmount = 0.0;
+        DecimalFormat dF = new DecimalFormat("#.##");
         int orderCount = orders.size();
         if (orderCount == 0){
-            return totalAmount;
+            return Double.parseDouble(dF.format(totalAmount));
         }
         for (Order order : orders) {
             totalAmount += order.calculateTotalAmount();
         }
-        DecimalFormat dF = new DecimalFormat("#.##");
         return Double.parseDouble(dF.format(totalAmount/orderCount));
     }
 }
