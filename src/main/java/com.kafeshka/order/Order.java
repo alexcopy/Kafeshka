@@ -30,6 +30,7 @@ public class Order {
     private PaymentMethod paymentMethod;
 
     public Order(Customer customer, PaymentMethod paymentMethod) {
+        this.items = new ArrayList<>();
         this.customer = customer;
         this.paymentMethod = paymentMethod;
     }
@@ -60,8 +61,10 @@ public class Order {
     }
 
 
-    public void addItemToOrder(Order order, MenuItem item){
-        //todo add realisation here
+    public void addNewItemToOrder(MenuItem item) {
+        if (item != null) {
+            this.items.add(item);
+        }
     }
 
     public void applyDiscount(double discountAmount) {

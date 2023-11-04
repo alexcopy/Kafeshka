@@ -5,6 +5,7 @@ import com.kafeshka.menu.MenuItem;
 import com.kafeshka.order.Order;
 import com.kafeshka.order.OrderManager;
 import com.kafeshka.order.OrderStatus;
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -144,5 +145,19 @@ class OrderManagerTest {
         orderManager.placeOrder(order3);
         double meanReceipt = orderManager.getMeanReceipt();
         assertEquals(40.0, meanReceipt, 0.001);
+    }
+
+    @Test
+    void testAddItemToOrder() {
+        Order order = new Order(customer, paymentMethod);
+        MenuItem menuItem = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
+        order.addNewItemToOrder(menuItem);
+        assertTrue(order.getItems().contains(menuItem));
+    }
+
+    @Test
+    void testAllArgsConstructor() {
+      //  new newOrder(double 300, String orderComments, boolean delivery, Date deliveryTime, String deliveryAddress, Customer customer, double discount, PaymentMethod paymentMethod) {
+//);
     }
 }

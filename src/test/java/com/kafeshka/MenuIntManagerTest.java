@@ -60,4 +60,5 @@ class MenuIntManagerTest {
             assertEquals("The item does not exist in the list!", e.getMessage());
         }
     }
+
 }

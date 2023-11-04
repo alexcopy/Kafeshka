@@ -46,9 +46,16 @@ private Discount mockDiscount;
 
     @Test
     void testRemoveDiscountFromOrder() {
+    this.discountManager.removeDiscountFromOrder(order);
+    verify(order).removeDiscount();
     }
 
     @Test
     void testEditDiscount() {
+        Discount existingDiscount = discountManager.getAvailableDiscounts().get(0);
+        discountManager.editDiscount(existingDiscount, "new Discount", 20.0);
+        assertEquals( 20.0, existingDiscount.getDiscountAmount());
+        assertEquals( "new Discount",existingDiscount.getName());
     }
 }
+//TODO 1) re-write payment method class to "enum".
