@@ -59,6 +59,11 @@ public class Order {
         return total;
     }
 
+
+    public void addItemToOrder(Order order, MenuItem item){
+        //todo add realisation here
+    }
+
     public void applyDiscount(double discountAmount) {
         if (discountAmount >= 0) {
             this.setDiscount(discountAmount);
