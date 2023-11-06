@@ -6,7 +6,7 @@ public enum OrderStatus {
      DELIVERED("The order was delivered"),
     CANCELED("The order was canceled");
 
-    private String StatusDesc;
+    private final String StatusDesc;
 
     OrderStatus(String statusDesc) {
         StatusDesc = statusDesc;

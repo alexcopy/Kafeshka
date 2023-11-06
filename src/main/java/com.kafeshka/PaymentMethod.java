@@ -4,10 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
-public class PaymentMethod {
-    private String name;
 
+public enum PaymentMethod {
+    CREDIT_CARD("Credit Card"),
+    DEBIT_CARD("Debit Card"),
+    PAYPAL("PayPal"),
+    GOOGLE_PAY("Google Pay"),
+    APPLE_PAY("Apple Pay"),
+    CASH ("Cash Pay");
+
+    private final String displayName;
+
+    PaymentMethod(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
 }

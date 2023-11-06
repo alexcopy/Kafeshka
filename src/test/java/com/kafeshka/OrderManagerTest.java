@@ -30,12 +30,17 @@ class OrderManagerTest {
                 "Böhmersweg 29",
                 new Date()
         );
-        paymentMethod = new PaymentMethod("MasterCard");
+        paymentMethod =  PaymentMethod.DEBIT_CARD;
+
     }
 
     @Test
     void testPlaceOrder() throws OrderException {
         Order order = new Order(customer, paymentMethod);
+        assertEquals("Debit Card", paymentMethod.getDisplayName());
+        paymentMethod = PaymentMethod.GOOGLE_PAY;
+        order.setPaymentMethod(paymentMethod);
+        assertEquals("Google Pay", paymentMethod.getDisplayName());
         orderManager.placeOrder(order);
         assertEquals(1, orderManager.getOrders().size());
     }

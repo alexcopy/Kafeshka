@@ -87,5 +87,6 @@ public class OrderManager {
         }
         return Double.parseDouble(dF.format(totalAmount/orderCount));
     }
+
 }
 
