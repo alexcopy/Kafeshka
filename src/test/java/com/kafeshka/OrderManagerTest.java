@@ -165,4 +165,32 @@ class OrderManagerTest {
       //  new newOrder(double 300, String orderComments, boolean delivery, Date deliveryTime, String deliveryAddress, Customer customer, double discount, PaymentMethod paymentMethod) {
 //);
     }
+
+    @Test
+    void testGetInProgressOrders() throws OrderException {
+        List<Order> ordersInProgress =  this.orderManager.getOrdersInProgress();
+        Order order1 = new Order(customer, paymentMethod);
+        Order order2 = new Order(customer, paymentMethod);
+        Order order3 = new Order(customer, paymentMethod);
+        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
+        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000);
+        MenuItem menuItem3 = new MenuItem("Salad", 60, 20.4, "with Ananas", false, true, 2000);
+        List<MenuItem> items1 = new ArrayList<>();
+        List<MenuItem> items2 = new ArrayList<>();
+        List<MenuItem> items3 = new ArrayList<>();
+        items1.add(menuItem1);
+        items2.add(menuItem2);
+        items3.add(menuItem3);
+        order1.setItems(items1);
+        order1.setStatus(OrderStatus.ON_THEWAY);
+        order2.setItems(items2);
+        order3.setItems(items3);
+        orderManager.placeOrder(order1);
+        orderManager.placeOrder(order2);
+        orderManager.placeOrder(order3);
+        assertEquals(2,this.orderManager.getOrdersInProgress().size());
+        assertEquals(1,this.orderManager.getOrdersOnTheWay().size());
+    }
+
+
 }

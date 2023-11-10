@@ -33,6 +33,7 @@ public class Order {
         this.items = new ArrayList<>();
         this.customer = customer;
         this.paymentMethod = paymentMethod;
+        this.status = OrderStatus.IN_PROGRESS;
     }
 
     public Order(double totalAmount, String orderComments, boolean delivery, Date deliveryTime, String deliveryAddress, Customer customer, double discount, PaymentMethod paymentMethod) {
@@ -47,6 +48,7 @@ public class Order {
         this.orderID = UUID.randomUUID();
         this.customer = customer;
         this.status = OrderStatus.IN_PROGRESS;
+        this.status = OrderStatus.ON_THEWAY;
         this.discount = discount;
         this.paymentMethod = paymentMethod;
     }

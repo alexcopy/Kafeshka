@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OrderManager {
     private List<Order> orders;
@@ -79,14 +80,25 @@ public class OrderManager {
         double totalAmount = 0.0;
         DecimalFormat dF = new DecimalFormat("#.##");
         int orderCount = orders.size();
-        if (orderCount == 0){
+        if (orderCount == 0) {
             return Double.parseDouble(dF.format(totalAmount));
         }
         for (Order order : orders) {
             totalAmount += order.calculateTotalAmount();
         }
-        return Double.parseDouble(dF.format(totalAmount/orderCount));
+        return Double.parseDouble(dF.format(totalAmount / orderCount));
     }
 
+
+    public List<Order> getOrdersInProgress() {
+        return orders.stream().filter(order -> order.getStatus() == OrderStatus.IN_PROGRESS).collect(Collectors.toList());
+
+    }
+   // TODO create a new method On The Way (for loop) + test
+    public List<Order> getOrdersOnTheWay(){
+        return orders.stream().filter(order -> order.getStatus()==OrderStatus.ON_THEWAY).collect(Collectors.toList());
+
+
+    }
 }
 
