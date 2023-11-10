@@ -1,0 +1,26 @@
+version: '2'
+services:
+    students-mariadb:
+        container_name: kafeshka-db
+        image: mariadb:10.3.7
+
+        environment:
+#            - MYSQL_HOST: localhost
+            - MYSQL_USER=kafeshka
+            - MYSQL_ROOT_PASSWORD=test123
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=kafeshka
+            - SPRING_MYSQL_JDBC_URL=jdbc:mysql://172.10.18.2:3386/kafeshka?useUnicode=true&characterEncoding=utf8&useSSL=false
+
+
+        volumes:
+            - "./volumes/kafeshka/mysql_init.sql:/usr/local/bin/mysql_init.sql"
+            - "./volumes/kafeshka/mysql_init.sql:/docker-entrypoint-initdb.d/dump.sql"
+        ports:
+        - 3386:3306
+
+
+
+
+
+

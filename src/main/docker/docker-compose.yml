@@ -1,0 +1,45 @@
+version: '2'
+services:
+  students-app:
+    image: redcopy/springmongoresttest:latest
+    container_name: students-app
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod
+      #    - SPRING_DATASOURCE_URL=jdbc:mysql://students-mariadb:3306/students?useSSL=false
+      - SPRING_MYSQL_JDBC_URL=jdbc:mysql://172.10.18.2:3306/students?useSSL=false&user=student&password=test123"
+      - SPRING_MYSQL_USER=student
+      - SPRING_MYSQL_PASS=test123
+      - HIBERNATE_DIALECT=org.hibernate.dialect.MariaDB10Dialect
+      - SPRING_JPA_GENERATE_DDL=true
+      - STUDENTS_SLEEP=10 # gives time for the database to boot before the application
+    ports:
+      - 8080:8080
+    extra_hosts:
+      - mysql.dockersto.test:172.10.18.2
+
+    networks:
+      stud_net:
+        ipv4_address: 172.10.18.5
+
+
+  students-mariadb:
+    extends:
+      file: ../mariadb.yml
+      service: students-mariadb
+    networks:
+      stud_net:
+        ipv4_address: 172.10.18.2
+
+networks:
+  stud_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.10.18.0/24
+          gateway: 172.10.18.1
+
+
