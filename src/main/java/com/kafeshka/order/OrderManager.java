@@ -1,8 +1,6 @@
 package com.kafeshka.order;
 
 import com.kafeshka.Customer;
-import com.kafeshka.discount.Discount;
-import com.kafeshka.discount.DiscountManager;
 import com.kafeshka.menu.MenuItem;
 import com.kafeshka.exception.OrderException;
 

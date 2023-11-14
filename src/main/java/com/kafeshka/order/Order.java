@@ -2,7 +2,6 @@ package com.kafeshka.order;
 
 
 import com.kafeshka.*;
-import com.kafeshka.discount.Discount;
 import com.kafeshka.menu.MenuItem;
 import lombok.Getter;
 import lombok.Setter;

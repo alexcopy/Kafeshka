@@ -1,11 +1,7 @@
 package com.kafeshka.discount;
 
 import com.kafeshka.order.Order;
-import com.kafeshka.order.OrderManager;
-import com.opencsv.bean.util.OrderedObject;
-import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
