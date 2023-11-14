@@ -5,7 +5,6 @@ import com.kafeshka.menu.MenuItem;
 import com.kafeshka.order.Order;
 import com.kafeshka.order.OrderManager;
 import com.kafeshka.order.OrderStatus;
-import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
