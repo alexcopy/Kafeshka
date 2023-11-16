@@ -9,5 +9,3 @@ public class KafeshkaRsApplication {
         SpringApplication.run(KafeshkaRsApplication.class, args);
     }
 }
-
-
