@@ -1,4 +1,4 @@
-package com.kafeshka.exception;
+package com.kafeshka.KafeshkaRS.exception;
 
 public class MenuException extends Exception {
     public MenuException(String message) {

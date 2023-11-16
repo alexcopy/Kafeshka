@@ -1,6 +1,6 @@
 package com.kafeshka;
 
-import com.kafeshka.menu.MenuItem;
+import com.kafeshka.KafeshkaRS.menu.MenuItem;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

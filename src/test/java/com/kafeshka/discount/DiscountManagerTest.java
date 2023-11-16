@@ -1,8 +1,10 @@
 package com.kafeshka.discount;
 
+import com.kafeshka.KafeshkaRS.discount.Discount;
+import com.kafeshka.KafeshkaRS.discount.DiscountManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.kafeshka.order.Order;
+import com.kafeshka.KafeshkaRS.order.Order;
 import java.util.ArrayList;
 import java.util.List;
 

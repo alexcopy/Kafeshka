@@ -1,8 +1,9 @@
-package com.kafeshka.order;
+package com.kafeshka.KafeshkaRS.order;
 
 
-import com.kafeshka.*;
-import com.kafeshka.menu.MenuItem;
+import com.kafeshka.KafeshkaRS.customer.Customer;
+import com.kafeshka.KafeshkaRS.menu.MenuItem;
+import com.kafeshka.KafeshkaRS.payment.PaymentMethod;
 import lombok.Getter;
 import lombok.Setter;
 

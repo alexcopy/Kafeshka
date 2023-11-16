@@ -1,7 +1,7 @@
-package com.kafeshka.services;
+package com.kafeshka.KafeshkaRS.services;
 
-import com.kafeshka.discount.Discount;
-import com.kafeshka.order.Order;
+import com.kafeshka.KafeshkaRS.discount.Discount;
+import com.kafeshka.KafeshkaRS.order.Order;
 
 import java.util.List;
 

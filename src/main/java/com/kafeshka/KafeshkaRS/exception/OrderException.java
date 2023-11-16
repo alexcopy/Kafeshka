@@ -1,4 +1,4 @@
-package com.kafeshka.exception;
+package com.kafeshka.KafeshkaRS.exception;
 
 public class OrderException extends Exception {
     public OrderException(String message) {

@@ -1,8 +1,8 @@
-package com.kafeshka.order;
+package com.kafeshka.KafeshkaRS.order;
 
-import com.kafeshka.Customer;
-import com.kafeshka.menu.MenuItem;
-import com.kafeshka.exception.OrderException;
+import com.kafeshka.KafeshkaRS.customer.Customer;
+import com.kafeshka.KafeshkaRS.menu.MenuItem;
+import com.kafeshka.KafeshkaRS.exception.OrderException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.kafeshka;
+package com.kafeshka.KafeshkaRS.payment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

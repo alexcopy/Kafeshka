@@ -1,4 +1,4 @@
-package com.kafeshka.order;
+package com.kafeshka.KafeshkaRS.order;
 
 public enum OrderStatus {
     IN_PROGRESS("The order is still cooking"),

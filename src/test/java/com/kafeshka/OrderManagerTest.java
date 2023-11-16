@@ -1,10 +1,12 @@
 package com.kafeshka;
 
-import com.kafeshka.exception.OrderException;
-import com.kafeshka.menu.MenuItem;
-import com.kafeshka.order.Order;
-import com.kafeshka.order.OrderManager;
-import com.kafeshka.order.OrderStatus;
+import com.kafeshka.KafeshkaRS.customer.Customer;
+import com.kafeshka.KafeshkaRS.exception.OrderException;
+import com.kafeshka.KafeshkaRS.menu.MenuItem;
+import com.kafeshka.KafeshkaRS.order.Order;
+import com.kafeshka.KafeshkaRS.order.OrderManager;
+import com.kafeshka.KafeshkaRS.order.OrderStatus;
+import com.kafeshka.KafeshkaRS.payment.PaymentMethod;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
