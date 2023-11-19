@@ -1,6 +1,6 @@
-package com.kafeshka;
+package com.kafeshka.KafeshkaRS.menu;
 
-import com.kafeshka.exception.MenuException;
+import com.kafeshka.KafeshkaRS.exception.MenuException;
 
 import java.util.ArrayList;
 import java.util.List;

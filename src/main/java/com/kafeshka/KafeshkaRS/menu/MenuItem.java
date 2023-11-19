@@ -1,4 +1,4 @@
-package com.kafeshka;
+package com.kafeshka.KafeshkaRS.menu;
 
 import lombok.*;
 

@@ -1,6 +1,8 @@
 package com.kafeshka;
 
-import com.kafeshka.exception.MenuException;
+import com.kafeshka.KafeshkaRS.exception.MenuException;
+import com.kafeshka.KafeshkaRS.menu.MenuItem;
+import com.kafeshka.KafeshkaRS.menu.MenuManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -58,4 +60,5 @@ class MenuIntManagerTest {
             assertEquals("The item does not exist in the list!", e.getMessage());
         }
     }
+
 }
