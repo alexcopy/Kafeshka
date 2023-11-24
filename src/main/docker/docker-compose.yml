@@ -1,45 +1,52 @@
-version: '2'
+version: '3.8'
+
 services:
-  students-app:
-    image: redcopy/springmongoresttest:latest
-    container_name: students-app
+  # MariaDB Service - Task 1
+  kafeshka-mariadb:
+    container_name: kafeshka-db
+    image: mariadb:10.3.7
     environment:
-      - _JAVA_OPTIONS=-Xmx512m -Xms256m
-      - SPRING_PROFILES_ACTIVE=prod
-      #    - SPRING_DATASOURCE_URL=jdbc:mysql://students-mariadb:3306/students?useSSL=false
-      - SPRING_MYSQL_JDBC_URL=jdbc:mysql://172.10.18.2:3306/students?useSSL=false&user=student&password=test123"
-      - SPRING_MYSQL_USER=student
-      - SPRING_MYSQL_PASS=test123
-      - HIBERNATE_DIALECT=org.hibernate.dialect.MariaDB10Dialect
-      - SPRING_JPA_GENERATE_DDL=true
-      - STUDENTS_SLEEP=10 # gives time for the database to boot before the application
+      - MYSQL_USER=kafeshka
+      - MYSQL_ROOT_PASSWORD=test123
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=kafeshka
+      - SPRING_MYSQL_JDBC_URL=jdbc:mysql://172.10.18.2:3376/kafeshka?useUnicode=true&characterEncoding=utf8&useSSL=false
+    volumes:
+      - "./volumes/kafeshka/mysql_init.sql:/docker-entrypoint-initdb.d/mysql_init.sql"
     ports:
-      - 8080:8080
-    extra_hosts:
-      - mysql.dockersto.test:172.10.18.2
-
+      - '3376:3306' # Expose MariaDB port as 3376 externally, keep 3306 internally
     networks:
-      stud_net:
-        ipv4_address: 172.10.18.5
+      kafeshanet:
+        ipv4_address: 172.10.18.2 # Custom IPv4 address for MariaDB
 
-
-  students-mariadb:
-    extends:
-      file: ../mariadb.yml
-      service: students-mariadb
+  # Spring Boot Application - Task 2
+  spring-app:
+    image: kafeshka-rs:latest
+    container_name: kafeshka-rs
+#    build:
+#      context: ../../..  # Adjust the context path to reach the project root
+#      dockerfile: Dockerfile
+#    volumes:
+#      - "./target/${SPRING_APP_JAR}:/app/${SPRING_APP_JAR}" # Adjust path relative to the location of docker-compose.yml
+    depends_on:
+      - kafeshka-mariadb # Ensure the Spring Boot app starts after MariaDB
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://172.10.18.2:3376/kafeshka?useUnicode=true&characterEncoding=utf8&useSSL=false # Use the custom IPv4 address
+      SPRING_DATASOURCE_USERNAME: kafeshka
+      SPRING_DATASOURCE_PASSWORD: test123
+    ports:
+      - '8085:8080' # Expose Spring Boot app port as 8085 externally
     networks:
-      stud_net:
-        ipv4_address: 172.10.18.2
+      kafeshanet:
+        ipv4_address: 172.10.18.3 # Custom IPv4 address for Spring Boot app
 
 networks:
-  stud_net:
+  kafeshanet:
     driver: bridge
     driver_opts:
       com.docker.network.enable_ipv6: "false"
     ipam:
       driver: default
       config:
-        - subnet: 172.10.18.0/24
+        - subnet: 172.10.18.0/24 # Define a custom subnet for the network
           gateway: 172.10.18.1
-
-
