@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KafeshkaRsApplication {
+public class KafeshkaRSApplication {
     public static void main(String[] args) {
-        SpringApplication.run(KafeshkaRsApplication.class, args);
+        SpringApplication.run(KafeshkaRSApplication.class, args);
     }
 }

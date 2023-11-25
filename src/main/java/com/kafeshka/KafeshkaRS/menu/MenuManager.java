@@ -28,7 +28,7 @@ public class MenuManager implements MenuInt {
         this.itemList.remove(item);
     }
 
-    public List getMenuItems() {
+    public List<MenuItem> getMenuItems() {
         return this.itemList;
     }
 }
