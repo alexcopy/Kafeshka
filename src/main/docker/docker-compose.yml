@@ -21,13 +21,8 @@ services:
 
   # Spring Boot Application - Task 2
   spring-app:
-    image: kafeshka-rs:latest
+    image: redcopy/kafeshka-rs:latest
     container_name: kafeshka-rs
-#    build:
-#      context: ../../..  # Adjust the context path to reach the project root
-#      dockerfile: Dockerfile
-#    volumes:
-#      - "./target/${SPRING_APP_JAR}:/app/${SPRING_APP_JAR}" # Adjust path relative to the location of docker-compose.yml
     depends_on:
       - kafeshka-mariadb # Ensure the Spring Boot app starts after MariaDB
     environment:

@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM openjdk:20
 
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
     KAFESH_SLEEP=0 \
@@ -8,12 +8,11 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 
 WORKDIR /app
 ADD . /code/
-COPY . /code/
 
 RUN cd /code/ && \
     rm -Rf /root/.m2/*.* && \
     ./mvnw clean package -DskipTests && \
-    mv /code/target/*.war /app/app.war
+    mv /code/target/*.jar /app/app.jar
 COPY target/*.jar /app/app.jar
 
 VOLUME /tmp
