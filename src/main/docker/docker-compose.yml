@@ -12,7 +12,7 @@ services:
       - MYSQL_DATABASE=kafeshka
       - SPRING_MYSQL_JDBC_URL=jdbc:mysql://172.10.18.2:3376/kafeshka?useUnicode=true&characterEncoding=utf8&useSSL=false
     volumes:
-      - "./volumes/kafeshka/mysql_init.sql:/docker-entrypoint-initdb.d/mysql_init.sql"
+      - "./volumes/mysql_init.sql:/docker-entrypoint-initdb.d/mysql_init.sql"
     ports:
       - '3376:3306' # Expose MariaDB port as 3376 externally, keep 3306 internally
     networks:
