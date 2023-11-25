@@ -13,6 +13,7 @@ RUN cd /code/ && \
     rm -Rf /root/.m2/*.* && \
     ./mvnw clean package -DskipTests && \
     mv /code/target/*.jar /app/app.jar
+COPY target/*.jar /app/app.jar
 
 VOLUME /tmp
 
