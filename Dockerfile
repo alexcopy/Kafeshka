@@ -10,10 +10,11 @@ WORKDIR /app
 ADD . /code/
 
 RUN cd /code/ && \
-    rm -Rf /root/.m2/*.* && \
-    ./mvnw clean package -DskipTests && \
-    mv /code/target/*.jar /app/app.jar
-COPY target/*.jar /app/app.jar
+    ./mvnw clean package  -DskipTests && \
+    mv /code/target/*.jar /app.jar && \
+    rm -Rf /code  /tmp && \
+    rm -Rf /root/.m2/
+
 
 VOLUME /tmp
 
