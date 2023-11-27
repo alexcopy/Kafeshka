@@ -12,8 +12,6 @@ services:
       - MYSQL_DATABASE=kafeshka
     volumes:
       - "./volumes/mysql_init.sql:/docker-entrypoint-initdb.d/mysql_init.sql"
-    ports:
-      - '3306:3306'
     networks:
       kafeshanet:
         ipv4_address: 172.10.18.2 # Custom IPv4 address for MariaDB
