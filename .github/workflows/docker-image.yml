@@ -21,11 +21,11 @@ jobs:
 
       # Build the Docker image
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag redcopy/kafeshka-rs:${{ env.IMAGE_TAG }}
+        run: docker build . --file Dockerfile --tag redcopy/kafeshka-rs:latest
 
       # Push the Docker image to Docker Hub
       - name: Push to Docker Hub
-        run: docker push redcopy/kafeshka-rs:${{ env.IMAGE_TAG }}
+        run: docker push redcopy/kafeshka-rs:latest
         
       - name: Fetch project details
         id: project-details
@@ -36,5 +36,5 @@ jobs:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
             curl -X POST -H 'Content-type: application/json' --data '{
-            "text": "✨🚀🔥  ImportanTE 🔥  !! \n Notification for Project:* ${{ steps.project-details.outputs.project-name }}\n*Build Status:* Docker Build Successful! 🎉"
+            "text": "✨🚀🔥  ImportanTE 🔥  !! \n Notification for Project:* ${{ steps.project-details.outputs.project-name }}\n*Build Status:* Docker Build redcopy/kafeshka-rs:latest Successful! 🎉"
             }' $SLACK_WEBHOOK_URL
