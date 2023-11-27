@@ -17,7 +17,7 @@ services:
 
 
   spring-app:
-    image: kafeshka-rs:latest
+    image: redcopy/kafeshka-rs:latest
     container_name: kafeshka-rs
     restart: always
     depends_on:
