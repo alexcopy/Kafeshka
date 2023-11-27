@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # MariaDB Service - Task 1
   kafeshka-mariadb:
     container_name: kafeshka-db
     image: mariadb:10.3.7
@@ -14,9 +13,9 @@ services:
       - "./volumes/mysql_init.sql:/docker-entrypoint-initdb.d/mysql_init.sql"
     networks:
       kafeshanet:
-        ipv4_address: 172.10.18.2 # Custom IPv4 address for MariaDB
+        ipv4_address: 172.10.18.2
 
-  # Spring Boot Application - Task 2
+
   spring-app:
     image: kafeshka-rs:latest
     container_name: kafeshka-rs
