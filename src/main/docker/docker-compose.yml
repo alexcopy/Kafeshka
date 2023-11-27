@@ -23,6 +23,7 @@ services:
   spring-app:
     image: redcopy/kafeshka-rs:latest
     container_name: kafeshka-rs
+    restart: always
     depends_on:
       - kafeshka-mariadb # Ensure the Spring Boot app starts after MariaDB
     environment:
