@@ -24,3 +24,15 @@ jobs:
       # Push the Docker image to Docker Hub
       - name: Push to Docker Hub
         run: docker push redcopy/kafeshka-rs:latest
+        
+      - name: Fetch project details
+        id: project-details
+        run: echo "::set-output name=project-name::-=KafeSHka RS=-"
+        
+      - name: Send Slack notification
+        env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+            curl -X POST -H 'Content-type: application/json' --data '{
+            "text": "✨🚀🔥  ImportanTE 🔥  !! \n Notification for Project:* ${{ steps.project-details.outputs.project-name }}\n*Build Status:* Docker Build Successful! 🎉"
+            }' $SLACK_WEBHOOK_URL
