@@ -10,31 +10,40 @@ services:
       - MYSQL_ROOT_PASSWORD=test123
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=kafeshka
-      - SPRING_MYSQL_JDBC_URL=jdbc:mysql://172.10.18.2:3376/kafeshka?useUnicode=true&characterEncoding=utf8&useSSL=false
     volumes:
       - "./volumes/mysql_init.sql:/docker-entrypoint-initdb.d/mysql_init.sql"
     ports:
-      - '3376:3306' # Expose MariaDB port as 3376 externally, keep 3306 internally
+      - '3306:3306'
     networks:
       kafeshanet:
         ipv4_address: 172.10.18.2 # Custom IPv4 address for MariaDB
 
   # Spring Boot Application - Task 2
   spring-app:
-    image: redcopy/kafeshka-rs:latest
+    image: kafeshka-rs:latest
     container_name: kafeshka-rs
     restart: always
     depends_on:
-      - kafeshka-mariadb # Ensure the Spring Boot app starts after MariaDB
+      - kafeshka-mariadb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://172.10.18.2:3376/kafeshka?useUnicode=true&characterEncoding=utf8&useSSL=false # Use the custom IPv4 address
-      SPRING_DATASOURCE_USERNAME: kafeshka
-      SPRING_DATASOURCE_PASSWORD: test123
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://172.10.18.2:3306/kafeshka?useSSL=false&user=kafeshka&password=test123"
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+      - SPRING_DATASOURCE_USERNAME=kafeshka
+      - SPRING_DATASOURCE_PASSWORD=test123
+
+      - SPRING_MYSQL_JDBC_URL=jdbc:mysql://172.10.18.2:3306/kafeshka?useSSL=false&user=kafeshka&password=test123"
+      - SPRING_MYSQL_USER=kafeshka
+      - SPRING_MYSQL_PASS=test123
+      - HIBERNATE_DIALECT=com.mysql.cj.jdbc.Driver
+      - SPRING_JPA_GENERATE_DDL=true
+      - KAFESH_SLEEP=10
+
     ports:
-      - '8085:8080' # Expose Spring Boot app port as 8085 externally
+      - '8085:8080'
     networks:
       kafeshanet:
-        ipv4_address: 172.10.18.3 # Custom IPv4 address for Spring Boot app
+        ipv4_address: 172.10.18.3
 
 networks:
   kafeshanet:
@@ -44,5 +53,5 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.10.18.0/24 # Define a custom subnet for the network
+        - subnet: 172.10.18.0/24
           gateway: 172.10.18.1
