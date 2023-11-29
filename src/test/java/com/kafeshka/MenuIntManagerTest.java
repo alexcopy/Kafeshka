@@ -18,7 +18,7 @@ class MenuIntManagerTest {
 
     @Test
     void addMenuItem() {
-        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000);
+        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000,120);
         try {
             this.menuManager.addMenuItem(menuItem);
         } catch (MenuException e) {
@@ -29,7 +29,7 @@ class MenuIntManagerTest {
 
     @Test
     void removeMenuItem() {
-        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000);
+        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000,120);
         try {
             this.menuManager.addMenuItem(menuItem);
             this.menuManager.removeMenuItem(menuItem);
@@ -41,7 +41,7 @@ class MenuIntManagerTest {
 
     @Test
     void testAddDuplicateMenuItem() {
-        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000);
+        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000,120);
         try {
             this.menuManager.addMenuItem(menuItem);
             this.menuManager.addMenuItem(menuItem);
@@ -53,7 +53,7 @@ class MenuIntManagerTest {
 
     @Test
     void testRemoveNonExistingMenuItem() {
-        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000);
+        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000,120);
         try {
             this.menuManager.removeMenuItem (menuItem);
         } catch (MenuException e) {

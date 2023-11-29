@@ -13,5 +13,5 @@ public class MenuItem{
     private boolean vegetarian;
     private boolean spicy;
     private int calories;
-
+    private int cookingTimeSec=120;
 }
