@@ -1,6 +1,7 @@
 package com.kafeshka.KafeshkaRS.web.controllers;
 
 import com.kafeshka.KafeshkaRS.model.Order;
+import com.kafeshka.KafeshkaRS.order.OrderStatus;
 import com.kafeshka.KafeshkaRS.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,13 +33,24 @@ public class OrderController {
     @PostMapping("/saveOrder")
     public String saveOrder(@ModelAttribute("order") Order order) {
         order.setOrderDate(new Date());
+        order.setStatus(OrderStatus.ORDER_QUEUED);
+        int totalCookingTimeSec = (order.getOrderItems().size() * 120) + 120;
+        order.setTotalCookingTimeSec(totalCookingTimeSec);
+        if (order.isDelivery()) {
+            order.setDeliveryTime(new Date());
+        }
         orderService.createOrder(order);
         return "redirect:/orders";
     }
 
-    @GetMapping
-    public List<Order> getAllOrders() {
-        return orderService.getAllOrders();
+    @GetMapping()
+    public String showOrders(Model model) {
+        // Fetch list of orders from the OrderService
+        List<Order> orders = orderService.getAllOrders();
+        // Add the list of orders to the model attribute
+        model.addAttribute("orders", orders);
+        // Return the Thymeleaf template name (orders.html)
+        return "orders";
     }
 
     @GetMapping("/{id}")
