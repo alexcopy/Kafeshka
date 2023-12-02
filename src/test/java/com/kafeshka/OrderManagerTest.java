@@ -31,7 +31,7 @@ class OrderManagerTest {
                 "Böhmersweg 29",
                 new Date()
         );
-        paymentMethod =  PaymentMethod.DEBIT_CARD;
+        paymentMethod = PaymentMethod.DEBIT_CARD;
 
     }
 
@@ -106,12 +106,12 @@ class OrderManagerTest {
         Order order1 = new Order(customer, paymentMethod);
         Order order2 = new Order(customer, paymentMethod);
         //Order order3 = new Order(customer, paymentMethod);
-        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
-        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000);
-        MenuItem menuItem3 = new MenuItem("Salad", 20, 20.4, "with Ananas", false, true, 2000);
-        // MenuItem menuItem4 = new MenuItem("Salad", 20, 20.4, "with Ananas", false, true, 2000);
-        //MenuItem menuItem5 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
-        //MenuItem menuItem6 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
+        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000, 120);
+        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000, 120);
+        MenuItem menuItem3 = new MenuItem("Salad", 20, 20.4, "with Ananas", false, true, 2000, 120);
+        // MenuItem menuItem4 = new MenuItem("Salad", 20, 20.4, "with Ananas", false, true, 2000,120);
+        //MenuItem menuItem5 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000,120);
+        //MenuItem menuItem6 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000,120);
         List<MenuItem> items1 = new ArrayList<>();
         List<MenuItem> items2 = new ArrayList<>();
         items1.add(menuItem1);
@@ -134,9 +134,9 @@ class OrderManagerTest {
         Order order1 = new Order(customer, paymentMethod);
         Order order2 = new Order(customer, paymentMethod);
         Order order3 = new Order(customer, paymentMethod);
-        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
-        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000);
-        MenuItem menuItem3 = new MenuItem("Salad", 60, 20.4, "with Ananas", false, true, 2000);
+        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000, 120);
+        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000, 120);
+        MenuItem menuItem3 = new MenuItem("Salad", 60, 20.4, "with Ananas", false, true, 2000, 120);
         List<MenuItem> items1 = new ArrayList<>();
         List<MenuItem> items2 = new ArrayList<>();
         List<MenuItem> items3 = new ArrayList<>();
@@ -156,26 +156,26 @@ class OrderManagerTest {
     @Test
     void testAddItemToOrder() {
         Order order = new Order(customer, paymentMethod);
-        MenuItem menuItem = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
+        MenuItem menuItem = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000, 120);
         order.addNewItemToOrder(menuItem);
         assertTrue(order.getItems().contains(menuItem));
     }
 
     @Test
     void testAllArgsConstructor() {
-      //  new newOrder(double 300, String orderComments, boolean delivery, Date deliveryTime, String deliveryAddress, Customer customer, double discount, PaymentMethod paymentMethod) {
+        //  new newOrder(double 300, String orderComments, boolean delivery, Date deliveryTime, String deliveryAddress, Customer customer, double discount, PaymentMethod paymentMethod) {
 //);
     }
 
     @Test
     void testGetInProgressOrders() throws OrderException {
-        List<Order> ordersInProgress =  this.orderManager.getOrdersInProgress();
+        List<Order> ordersInProgress = this.orderManager.getOrdersInProgress();
         Order order1 = new Order(customer, paymentMethod);
         Order order2 = new Order(customer, paymentMethod);
         Order order3 = new Order(customer, paymentMethod);
-        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000);
-        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000);
-        MenuItem menuItem3 = new MenuItem("Salad", 60, 20.4, "with Ananas", false, true, 2000);
+        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000, 120);
+        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000, 120);
+        MenuItem menuItem3 = new MenuItem("Salad", 60, 20.4, "with Ananas", false, true, 2000, 120);
         List<MenuItem> items1 = new ArrayList<>();
         List<MenuItem> items2 = new ArrayList<>();
         List<MenuItem> items3 = new ArrayList<>();
@@ -189,9 +189,9 @@ class OrderManagerTest {
         orderManager.placeOrder(order1);
         orderManager.placeOrder(order2);
         orderManager.placeOrder(order3);
-        assertEquals(2,this.orderManager.getOrdersInProgress().size());
-        assertEquals(1,this.orderManager.getOrdersOnTheWay().size());
+        assertEquals(2, this.orderManager.getOrdersInProgress().size());
+        assertEquals(1, this.orderManager.getOrdersOnTheWay().size());
+        int cookingTimeSec = this.orderManager.getTotalOrderInProgressTotalCookingTimeSec();
+        assertEquals(240, cookingTimeSec);
     }
-
-
 }

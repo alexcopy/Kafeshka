@@ -8,6 +8,7 @@ services:
 #            - MYSQL_HOST: localhost
             - MYSQL_USER=kafeshka
             - MYSQL_ROOT_PASSWORD=test123
+            - MYSQL_USER_PASSWORD=test123
             - MYSQL_ALLOW_EMPTY_PASSWORD=yes
             - MYSQL_DATABASE=kafeshka
             - SPRING_MYSQL_JDBC_URL=jdbc:mysql://172.10.18.2:3386/kafeshka?useUnicode=true&characterEncoding=utf8&useSSL=false

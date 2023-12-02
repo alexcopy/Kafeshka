@@ -17,6 +17,8 @@ import java.util.UUID;
 public class Order {
     private List<MenuItem> items;
     private double totalAmount;
+    private double totalCookingTimeSec;
+
     private double tips;
     private String orderComments;
     private Date orderDate;
@@ -33,7 +35,7 @@ public class Order {
         this.items = new ArrayList<>();
         this.customer = customer;
         this.paymentMethod = paymentMethod;
-        this.status = OrderStatus.IN_PROGRESS;
+        this.status = OrderStatus.ORDER_QUEUED;
     }
 
     public Order(double totalAmount, String orderComments, boolean delivery, Date deliveryTime, String deliveryAddress, Customer customer, double discount, PaymentMethod paymentMethod) {
@@ -47,10 +49,13 @@ public class Order {
         this.deliveryAddress = deliveryAddress;
         this.orderID = UUID.randomUUID();
         this.customer = customer;
-        this.status = OrderStatus.IN_PROGRESS;
-        this.status = OrderStatus.ON_THEWAY;
+        this.status = OrderStatus.ORDER_QUEUED;
         this.discount = discount;
         this.paymentMethod = paymentMethod;
+    }
+
+    public int getTotalOrderCookingTimeSec() {
+        return calculateTotalCookingTime();
     }
 
     public double calculateTotalAmount() {
@@ -59,6 +64,15 @@ public class Order {
             total += item.getPrice();
         }
         this.setTotalAmount(total);
+        return total;
+    }
+
+    private int calculateTotalCookingTime() {
+        int total = 0;
+        for (MenuItem item : items) {
+            total += item.getCookingTimeSec();
+        }
+        this.totalCookingTimeSec = total;
         return total;
     }
 

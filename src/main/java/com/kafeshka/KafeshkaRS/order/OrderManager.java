@@ -5,10 +5,7 @@ import com.kafeshka.KafeshkaRS.menu.MenuItem;
 import com.kafeshka.KafeshkaRS.exception.OrderException;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class OrderManager {
@@ -71,7 +68,6 @@ public class OrderManager {
         List<MenuItem> mostPopularDishes = new ArrayList<>(dishOrderCount.keySet());
         mostPopularDishes.sort((dish1, dish2) -> dishOrderCount.get(dish2) - dishOrderCount.get(dish1));
         return mostPopularDishes.subList(0, Math.min(numberOfItems, mostPopularDishes.size()));
-
     }
 
     public double getMeanReceipt() {
@@ -89,14 +85,25 @@ public class OrderManager {
 
 
     public List<Order> getOrdersInProgress() {
-        return orders.stream().filter(order -> order.getStatus() == OrderStatus.IN_PROGRESS).collect(Collectors.toList());
-
+        List<OrderStatus> inProgressStatuses = OrderStatus.getOrdersInProgress();
+        return orders.stream()
+                .filter(order -> inProgressStatuses.contains(order.getStatus()))
+                .collect(Collectors.toList());
     }
-   // TODO create a new method On The Way (for loop) + test
-    public List<Order> getOrdersOnTheWay(){
-        return orders.stream().filter(order -> order.getStatus()==OrderStatus.ON_THEWAY).collect(Collectors.toList());
 
+    public List<Order> getOrdersIsQueued() {
+        return orders.stream().filter(order -> order.getStatus() == OrderStatus.ORDER_QUEUED).collect(Collectors.toList());
+    }
 
+    // TODO create a new method On The Way (for loop) + test
+    public List<Order> getOrdersOnTheWay() {
+        return orders.stream().filter(order -> order.getStatus() == OrderStatus.ON_THEWAY).collect(Collectors.toList());
+    }
+
+    public int getTotalOrderInProgressTotalCookingTimeSec() {
+        return this.getOrdersInProgress().stream()
+                .mapToInt(Order::getTotalOrderCookingTimeSec)
+                .sum();
     }
 }
 
