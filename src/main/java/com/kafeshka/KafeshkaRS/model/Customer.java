@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -28,6 +29,7 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // Adjust the pattern according to your input format
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
