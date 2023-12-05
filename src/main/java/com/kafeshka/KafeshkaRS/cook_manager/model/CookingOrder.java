@@ -1,7 +1,8 @@
-package com.kafeshka.KafeshkaRS.model;
+package com.kafeshka.KafeshkaRS.cook_manager.model;
 
 
-import com.kafeshka.KafeshkaRS.menu.MenuItem;
+import com.kafeshka.KafeshkaRS.model.Customer;
+import com.kafeshka.KafeshkaRS.model.OrderItem;
 import com.kafeshka.KafeshkaRS.order.OrderStatus;
 import com.kafeshka.KafeshkaRS.payment.PaymentMethod;
 import jakarta.persistence.*;
@@ -15,8 +16,8 @@ import java.util.UUID;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "orders")
-public class Order {
+@Table(name = "cooking_orders")
+public class CookingOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

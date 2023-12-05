@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 
 @Entity
 @Data
@@ -29,5 +31,11 @@ public class MenuItem {
     @Column(nullable = false)
     private int calories;
     @Column(nullable = false)
+    private String itemExpertise;
+    @Column(nullable = false)
+    private String dishType;
+    @Column(nullable = false)
     private int cookingTimeSec;
+    @Column(nullable = false)
+    private LocalDateTime orderTime;
 }

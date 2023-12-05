@@ -10,6 +10,7 @@ import com.kafeshka.KafeshkaRS.payment.PaymentMethod;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -106,10 +107,11 @@ class OrderManagerTest {
         Order order1 = new Order(customer, paymentMethod);
         Order order2 = new Order(customer, paymentMethod);
         //Order order3 = new Order(customer, paymentMethod);
-        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000, 120);
-        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000, 120);
-        MenuItem menuItem3 = new MenuItem("Salad", 20, 20.4, "with Ananas", false, true, 2000, 120);
-        // MenuItem menuItem4 = new MenuItem("Salad", 20, 20.4, "with Ananas", false, true, 2000,120);
+        LocalDateTime nowt = LocalDateTime.now();
+        MenuItem menuItem1 = new MenuItem("Pizza", " "," ", 20, 20.4, "with Ananas", false, true, 2000, 120, nowt);
+        MenuItem menuItem2 = new MenuItem("Pasta", " "," ",40, 20.4, "with Ananas", false, true, 2000, 120,nowt);
+        MenuItem menuItem3 = new MenuItem("Salad", " "," ", 20, 20.4, "with Ananas", false, true, 2000, 120,nowt);
+        // MenuItem menuItem4 = new MenuItem("Salad", 20, 20.4, "with Ananas", false, true, 2000,120,nowt);
         //MenuItem menuItem5 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000,120);
         //MenuItem menuItem6 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000,120);
         List<MenuItem> items1 = new ArrayList<>();
@@ -134,9 +136,10 @@ class OrderManagerTest {
         Order order1 = new Order(customer, paymentMethod);
         Order order2 = new Order(customer, paymentMethod);
         Order order3 = new Order(customer, paymentMethod);
-        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000, 120);
-        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000, 120);
-        MenuItem menuItem3 = new MenuItem("Salad", 60, 20.4, "with Ananas", false, true, 2000, 120);
+        LocalDateTime nowt = LocalDateTime.now();
+        MenuItem menuItem1 = new MenuItem("Pizza", " "," ",20, 20.4, "with Ananas", false, true, 2000, 120,nowt);
+        MenuItem menuItem2 = new MenuItem("Pasta", " "," ",40, 20.4, "with Ananas", false, true, 2000, 120,nowt);
+        MenuItem menuItem3 = new MenuItem("Salad", " "," ",60, 20.4, "with Ananas", false, true, 2000, 120,nowt);
         List<MenuItem> items1 = new ArrayList<>();
         List<MenuItem> items2 = new ArrayList<>();
         List<MenuItem> items3 = new ArrayList<>();
@@ -156,7 +159,8 @@ class OrderManagerTest {
     @Test
     void testAddItemToOrder() {
         Order order = new Order(customer, paymentMethod);
-        MenuItem menuItem = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000, 120);
+        LocalDateTime nowt = LocalDateTime.now();
+        MenuItem menuItem = new MenuItem("Pizza", "","", 20, 20.4, "with Ananas", false, true, 2000, 120, nowt);
         order.addNewItemToOrder(menuItem);
         assertTrue(order.getItems().contains(menuItem));
     }
@@ -173,9 +177,10 @@ class OrderManagerTest {
         Order order1 = new Order(customer, paymentMethod);
         Order order2 = new Order(customer, paymentMethod);
         Order order3 = new Order(customer, paymentMethod);
-        MenuItem menuItem1 = new MenuItem("Pizza", 20, 20.4, "with Ananas", false, true, 2000, 120);
-        MenuItem menuItem2 = new MenuItem("Pasta", 40, 20.4, "with Ananas", false, true, 2000, 120);
-        MenuItem menuItem3 = new MenuItem("Salad", 60, 20.4, "with Ananas", false, true, 2000, 120);
+        LocalDateTime nowt = LocalDateTime.now();
+        MenuItem menuItem1 = new MenuItem("Pizza", "","", 20, 20.4, "with Ananas", false, true, 2000, 120,nowt);
+        MenuItem menuItem2 = new MenuItem("Pasta", "","",40, 20.4, "with Ananas", false, true, 2000, 120,nowt);
+        MenuItem menuItem3 = new MenuItem("Salad", "","",60, 20.4, "with Ananas", false, true, 2000, 120,nowt);
         List<MenuItem> items1 = new ArrayList<>();
         List<MenuItem> items2 = new ArrayList<>();
         List<MenuItem> items3 = new ArrayList<>();
