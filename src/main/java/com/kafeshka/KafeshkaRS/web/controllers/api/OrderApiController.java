@@ -1,4 +1,4 @@
-package com.kafeshka.KafeshkaRS.web.controllers;
+package com.kafeshka.KafeshkaRS.web.controllers.api;
 
 import com.kafeshka.KafeshkaRS.model.Order;
 import com.kafeshka.KafeshkaRS.services.OrderService;

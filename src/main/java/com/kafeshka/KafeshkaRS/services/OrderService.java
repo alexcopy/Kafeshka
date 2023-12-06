@@ -22,6 +22,7 @@ public class OrderService implements OrderServiceInt {
     @Override
     public Optional<Order> createOrder(Order order) {
         try {
+            order.setStatus(OrderStatus.ORDER_QUEUED);
             Order savedOrder = orderRepository.save(order);
             return Optional.ofNullable(savedOrder);
         } catch (Exception e) {

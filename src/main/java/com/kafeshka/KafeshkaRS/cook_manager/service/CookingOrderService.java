@@ -10,9 +10,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class CookingOrderService {
+public class CookingOrderService implements CookingOrderServiceInt {
 
     private final CookingOrderRepo cookingOrderRepository;
 
@@ -61,6 +62,28 @@ public class CookingOrderService {
                 e.printStackTrace();
                 return null; // Or handle the exception as required
             }
+        }
+    }
+
+    @Override
+    public Optional<CookingOrder> createCookingOrder(CookingOrder cookingOrder) {
+        try {
+            CookingOrder savedCookingOrder = cookingOrderRepository.save(cookingOrder);
+            return Optional.ofNullable(savedCookingOrder);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public boolean deleteCookingOrder(Long id) {
+        try {
+            cookingOrderRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

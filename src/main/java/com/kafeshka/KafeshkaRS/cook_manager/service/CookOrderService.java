@@ -2,6 +2,7 @@ package com.kafeshka.KafeshkaRS.cook_manager.service;
 
 import com.kafeshka.KafeshkaRS.cook_manager.CookManager;
 import com.kafeshka.KafeshkaRS.cook_manager.model.CookingOrder;
+import com.kafeshka.KafeshkaRS.cook_manager.repository.CookingOrderRepo;
 import com.kafeshka.KafeshkaRS.model.MenuItem;
 import com.kafeshka.KafeshkaRS.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,16 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CookOrderService {
     private final CookManager cookManager;
+    private final CookingOrderRepo cookingOrderRepository;
 
     @Autowired
-    public CookOrderService(CookManager cookManager) {
+    public CookOrderService(CookManager cookManager, CookingOrderRepo cookingOrderRepo) {
+        this.cookingOrderRepository = cookingOrderRepo;
         this.cookManager = cookManager;
     }
 
@@ -134,8 +138,8 @@ public class CookOrderService {
                 requiredExpertise = "General Cooking"; // Default expertise for unspecified dishes
                 break;
         }
-
         return requiredExpertise;
     }
+
 
 }
