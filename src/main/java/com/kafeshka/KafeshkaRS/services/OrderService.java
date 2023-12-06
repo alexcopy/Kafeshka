@@ -1,13 +1,16 @@
 package com.kafeshka.KafeshkaRS.services;
 
 import com.kafeshka.KafeshkaRS.model.Order;
+import com.kafeshka.KafeshkaRS.order.OrderStatus;
 import com.kafeshka.KafeshkaRS.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class OrderService {
+public class OrderService implements OrderServiceInt {
 
     private final OrderRepository orderRepository;
 
@@ -16,17 +19,27 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    @Override
+    public Optional<Order> createOrder(Order order) {
+        try {
+            order.setStatus(OrderStatus.ORDER_QUEUED);
+            Order savedOrder = orderRepository.save(order);
+            return Optional.ofNullable(savedOrder);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
 
-    public Order getOrderById(Long id) {
-        return orderRepository.findById(id).orElse(null);
-    }
-
-    public Order createOrder(Order order) {
-        // Implement any additional business logic if needed
-        return orderRepository.save(order);
+    @Override
+    public boolean deleteOrder(Long orderId) {
+        try {
+            orderRepository.deleteById(orderId);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public Order updateOrder(Long id, Order updatedOrder) {
@@ -38,9 +51,23 @@ public class OrderService {
         return null; // Or throw an exception if needed
     }
 
-    public void deleteOrder(Long id) {
-        // Implement any additional logic before deletion
-        orderRepository.deleteById(id);
+    @Override
+    public Optional<Order> getOrderById(Long orderId) {
+        return orderRepository.findById(orderId);
+    }
+
+    @Override
+    public Optional<List<Order>> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+
+        // Return an Optional of the orders list
+        return Optional.of(orders);
+    }
+
+    @Override
+    public Optional<List<Order>> getOrdersByStatus(OrderStatus status) {
+        List<Order> orders = orderRepository.findByStatus(status);
+        return Optional.ofNullable(orders.isEmpty() ? null : orders);
     }
 }
 

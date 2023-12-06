@@ -6,6 +6,8 @@ import com.kafeshka.KafeshkaRS.menu.MenuManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MenuIntManagerTest {
@@ -18,7 +20,8 @@ class MenuIntManagerTest {
 
     @Test
     void addMenuItem() {
-        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000,120);
+        LocalDateTime nowt = LocalDateTime.now();
+        MenuItem menuItem = new MenuItem("Margarita", "", "", 2.13, 500, "italien pizza", false, true, 5000, 120, nowt);
         try {
             this.menuManager.addMenuItem(menuItem);
         } catch (MenuException e) {
@@ -29,7 +32,9 @@ class MenuIntManagerTest {
 
     @Test
     void removeMenuItem() {
-        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000,120);
+        LocalDateTime nowt = LocalDateTime.now();
+        MenuItem menuItem = new MenuItem("Margarita", "", "", 2.13, 500, "italien pizza", false, true, 5000, 120, nowt);
+
         try {
             this.menuManager.addMenuItem(menuItem);
             this.menuManager.removeMenuItem(menuItem);
@@ -41,7 +46,9 @@ class MenuIntManagerTest {
 
     @Test
     void testAddDuplicateMenuItem() {
-        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000,120);
+        LocalDateTime nowt = LocalDateTime.now();
+        MenuItem menuItem = new MenuItem("Margarita", "", "", 2.13, 500, "italien pizza", false, true, 5000, 120, nowt);
+
         try {
             this.menuManager.addMenuItem(menuItem);
             this.menuManager.addMenuItem(menuItem);
@@ -53,9 +60,11 @@ class MenuIntManagerTest {
 
     @Test
     void testRemoveNonExistingMenuItem() {
-        MenuItem menuItem = new MenuItem("Margarita", 2.13, 500, "italien pizza", false, true, 5000,120);
+        LocalDateTime nowt = LocalDateTime.now();
+        MenuItem menuItem = new MenuItem("Margarita", "", "", 2.13, 500, "italien pizza", false, true, 5000, 120, nowt);
+
         try {
-            this.menuManager.removeMenuItem (menuItem);
+            this.menuManager.removeMenuItem(menuItem);
         } catch (MenuException e) {
             assertEquals("The item does not exist in the list!", e.getMessage());
         }
