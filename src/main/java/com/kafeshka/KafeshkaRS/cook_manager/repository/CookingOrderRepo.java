@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface CookingOrderRepo extends JpaRepository<CookingOrder, Long> {
     Optional<CookingOrder> findFirstByStatusOrderByCreatedAtAsc(OrderStatus status);
+    CookingOrder findByOrderId(Long id);
 }

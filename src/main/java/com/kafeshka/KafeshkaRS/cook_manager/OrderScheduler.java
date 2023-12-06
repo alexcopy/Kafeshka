@@ -29,6 +29,7 @@ public class OrderScheduler {
     @Scheduled(fixedRate = 5000) // Runs every 5 seconds
     public void filterQueuedOrders() {
         Optional<CookingOrder> queuedOrder = retrieveQueuedOrderFromRepository();
+        System.out.println("Checking for new ORDER_QUEUED in Orders Table: " + queuedOrder);
         queuedOrder.ifPresent(cookOrderService::processOrder);
     }
 

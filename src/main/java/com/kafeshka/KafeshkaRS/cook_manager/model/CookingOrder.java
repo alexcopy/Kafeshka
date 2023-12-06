@@ -1,7 +1,6 @@
 package com.kafeshka.KafeshkaRS.cook_manager.model;
 
 
-import com.kafeshka.KafeshkaRS.model.Customer;
 import com.kafeshka.KafeshkaRS.model.OrderItem;
 import com.kafeshka.KafeshkaRS.order.OrderStatus;
 import com.kafeshka.KafeshkaRS.payment.PaymentMethod;
@@ -9,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -18,22 +18,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @Table(name = "cooking_orders")
 public class CookingOrder {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
-
-    @Column(name = "total_amount")
-    private double totalAmount;
+    @Column(name = "menu_items", columnDefinition = "TEXT")
+    private String menuItems;
 
     @Column(name = "total_cooking_time_sec")
     private double totalCookingTimeSec;
-
-    @Column(name = "tips")
-    private double tips;
 
     @Column(name = "order_comments")
     private String orderComments;
@@ -51,21 +44,23 @@ public class CookingOrder {
     private String deliveryAddress;
 
     @Column(name = "order_id", unique = true)
-    private UUID orderId;
+    private Long orderId;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @Column(name = "customer_id", unique = true)
+    private Long customerID;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "order_status")
     private OrderStatus status;
 
-    @Column(name = "discount")
-    private double discount;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "payment_method")
-    private PaymentMethod paymentMethod;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt; // Define 'createdAt' field
 
+    // Constructors, getters, setters, and other methods...
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now(); // Set current timestamp before persisting the entity
+    }
 }

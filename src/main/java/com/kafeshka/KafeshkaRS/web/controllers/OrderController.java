@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/orders")
@@ -46,7 +47,7 @@ public class OrderController {
     @GetMapping()
     public String showOrders(Model model) {
         // Fetch list of orders from the OrderService
-        List<Order> orders = orderService.getAllOrders();
+        Optional<List<Order>> orders = orderService.getAllOrders();
         // Add the list of orders to the model attribute
         model.addAttribute("orders", orders);
         // Return the Thymeleaf template name (orders.html)
