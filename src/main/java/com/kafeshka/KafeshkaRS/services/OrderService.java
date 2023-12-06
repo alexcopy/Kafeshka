@@ -5,6 +5,7 @@ import com.kafeshka.KafeshkaRS.order.OrderStatus;
 import com.kafeshka.KafeshkaRS.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,15 +19,26 @@ public class OrderService implements OrderServiceInt {
         this.orderRepository = orderRepository;
     }
 
-
-
-    public Order getOrderById(Long id) {
-        return orderRepository.findById(id).orElse(null);
+    @Override
+    public Optional<Order> createOrder(Order order) {
+        try {
+            Order savedOrder = orderRepository.save(order);
+            return Optional.ofNullable(savedOrder);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
 
-    public Order createOrder(Order order) {
-        // Implement any additional business logic if needed
-        return orderRepository.save(order);
+    @Override
+    public boolean deleteOrder(Long orderId) {
+        try {
+            orderRepository.deleteById(orderId);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public Order updateOrder(Long id, Order updatedOrder) {
@@ -38,9 +50,9 @@ public class OrderService implements OrderServiceInt {
         return null; // Or throw an exception if needed
     }
 
-    public void deleteOrder(Long id) {
-        // Implement any additional logic before deletion
-        orderRepository.deleteById(id);
+    @Override
+    public Optional<Order> getOrderById(Long orderId) {
+        return orderRepository.findById(orderId);
     }
 
     @Override

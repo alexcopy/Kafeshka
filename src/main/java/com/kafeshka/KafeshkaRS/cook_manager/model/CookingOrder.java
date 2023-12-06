@@ -53,11 +53,8 @@ public class CookingOrder {
     @Column(name = "order_status")
     private OrderStatus status;
 
-
     @Column(name = "created_at")
     private LocalDateTime createdAt; // Define 'createdAt' field
-
-    // Constructors, getters, setters, and other methods...
 
     @PrePersist
     protected void onCreate() {
