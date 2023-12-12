@@ -9,17 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CustomerService {
+public class CustomerService implements CustomerServiceInt {
 
     private final CustomerRepository customerRepository;
 
     @Autowired
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
-    }
-
-    public void addCustomer(Customer customer) {
-        customerRepository.save(customer);
     }
 
     public List<Customer> getAllCustomers() {
@@ -37,6 +33,24 @@ public class CustomerService {
 
     public void deleteCustomerById(Long id) {
         customerRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Customer> findCustomerByEmailOrPhone(String email, String phone) {
+        // Check if customer exists by email or phone
+        Optional<Customer> existingCustomerByEmail = customerRepository.findByEmail(email);
+        if (existingCustomerByEmail.isPresent()) {
+            return existingCustomerByEmail;
+        }
+
+        Optional<Customer> existingCustomerByPhone = customerRepository.findByPhoneNumber(phone);
+        return existingCustomerByPhone;
+    }
+
+    @Override
+    public Customer addCustomer(Customer customer) {
+        // Implement logic to add a new customer to the database
+        return customerRepository.save(customer);
     }
 }
 

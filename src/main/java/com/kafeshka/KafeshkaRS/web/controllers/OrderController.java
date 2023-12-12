@@ -33,7 +33,6 @@ public class OrderController {
 
     @PostMapping("/saveOrder")
     public String saveOrder(@ModelAttribute("order") Order order) {
-        order.setOrderDate(new Date());
         order.setStatus(OrderStatus.ORDER_QUEUED);
         int totalCookingTimeSec = (order.getOrderItems().size() * 120) + 120;
         order.setTotalCookingTimeSec(totalCookingTimeSec);

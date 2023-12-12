@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuManager implements MenuInt {
-    private List<MenuItem> itemList;
+    private final List<MenuItem> itemList;
 
     public MenuManager() {
         this.itemList = new ArrayList<>();

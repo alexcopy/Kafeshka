@@ -1,28 +1,32 @@
 package com.kafeshka.KafeshkaRS.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.kafeshka.KafeshkaRS.menu.MenuItem;
 import com.kafeshka.KafeshkaRS.order.OrderStatus;
 import com.kafeshka.KafeshkaRS.payment.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
 @Data
-@NoArgsConstructor
 @Table(name = "orders")
 public class Order {
+
+    public Order() {
+        this.orderId = UUID.randomUUID();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderItem> orderItems;
 
     @Column(name = "total_amount")
@@ -37,19 +41,20 @@ public class Order {
     @Column(name = "order_comments")
     private String orderComments;
 
-    @Column(name = "order_date")
-    private Date orderDate;
-
     @Column(name = "delivery")
     private boolean delivery;
 
     @Column(name = "delivery_time")
     private Date deliveryTime;
 
-    @Column(name = "delivery_address")
-    private String deliveryAddress;
+    @OneToMany(mappedBy = "order")
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @org.springframework.data.annotation.Transient
+    @JsonIgnoreProperties(value = { "order" }, allowSetters = true)
+    private Set<Address> deliveryAddresses = new HashSet<>();
 
-    @Column(name = "order_id", unique = true)
+    @GeneratedValue
+    @Column(name = "order_id", unique = true, columnDefinition = "BINARY(16)")
     private UUID orderId;
 
     @ManyToOne
@@ -67,4 +72,11 @@ public class Order {
     @Column(name = "payment_method")
     private PaymentMethod paymentMethod;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt; // Define 'createdAt' field
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now(); // Set current timestamp before persisting the entity
+    }
 }

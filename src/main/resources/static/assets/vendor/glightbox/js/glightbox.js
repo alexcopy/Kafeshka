@@ -1682,7 +1682,7 @@
               this.instance.close();
             }
 
-            return;
+
           }
         }
       }
@@ -1772,7 +1772,7 @@
     }
 
     slideMedia.insertBefore(img, slideMedia.firstChild);
-    return;
+
   }
 
   function slideVideo(slide, data, index, callback) {
@@ -1909,7 +1909,7 @@
       callback();
     }
 
-    return;
+
   }
 
   function slideIframe(slide, data, index, callback) {
@@ -1921,7 +1921,7 @@
     slideMedia.parentNode.style.maxWidth = data.width;
     slideMedia.parentNode.style.height = data.height;
     slideMedia.appendChild(iframe);
-    return;
+
   }
 
   var SlideConfigParser = function () {

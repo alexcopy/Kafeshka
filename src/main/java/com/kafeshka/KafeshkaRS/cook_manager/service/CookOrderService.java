@@ -37,11 +37,14 @@ public class CookOrderService {
     }
 
     public void processOrder(CookingOrder cookingOrder) {
-        List<Order> queuedOrders = null;
+        List<CookingOrder> queuedOrders = this.cookingOrderRepository.findAll();
 
-        for (Order order : queuedOrders) {
-
-
+        if (queuedOrders == null) {
+            System.out.println(" No Queued orders found: " + queuedOrders);
+            return;
+        }
+        for (CookingOrder order : queuedOrders) {
+            System.out.println(" The Queued orders are: " + queuedOrders.size());
             // Process each queued order, perform necessary actions
             // For example, update order status, send notifications, etc.
             // You might have something like:
@@ -93,7 +96,7 @@ public class CookOrderService {
 
     public boolean determineUrgency(MenuItem menuItem) {
         // Get the menuItem timestamp or creation time
-        LocalDateTime menuItemTime = menuItem.getOrderTime(); // Replace getOrderTime() with your method to retrieve menuItem timestamp
+        LocalDateTime menuItemTime = menuItem.getCreatedAt(); // Replace getOrderTime() with your method to retrieve menuItem timestamp
 
         // Get the current time
         LocalDateTime currentTime = LocalDateTime.now();

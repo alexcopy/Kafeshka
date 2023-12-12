@@ -7,6 +7,9 @@ import java.util.Optional;
 public interface MenuItemServiceInt {
     List<MenuItem> getAllMenuItems();
     Optional<MenuItem> getMenuItemById(Long id);
+
+    Optional<MenuItem> getMenuItemByName(String name);
+
     Optional<MenuItem> createMenuItem(MenuItem menuItem);
     boolean deleteMenuItem(Long id);
 

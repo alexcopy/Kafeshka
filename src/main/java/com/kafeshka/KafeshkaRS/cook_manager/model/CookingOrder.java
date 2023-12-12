@@ -32,7 +32,7 @@ public class CookingOrder {
     private String orderComments;
 
     @Column(name = "order_date")
-    private Date orderDate;
+    private LocalDateTime orderDate;
 
     @Column(name = "delivery")
     private boolean delivery;
@@ -46,7 +46,7 @@ public class CookingOrder {
     @Column(name = "order_id", unique = true)
     private Long orderId;
 
-    @Column(name = "customer_id", unique = true)
+    @Column(name = "customer_id")
     private Long customerID;
 
     @Enumerated(EnumType.STRING)

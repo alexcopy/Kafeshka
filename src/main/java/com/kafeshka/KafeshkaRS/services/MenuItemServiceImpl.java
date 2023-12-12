@@ -29,6 +29,11 @@ public class MenuItemServiceImpl implements MenuItemServiceInt {
     }
 
     @Override
+    public Optional<MenuItem> getMenuItemByName(String name) {
+        return menuItemRepository.findByName(name);
+    }
+
+    @Override
     public Optional<MenuItem> createMenuItem(MenuItem menuItem) {
         try {
             MenuItem createdMenuItem = menuItemRepository.save(menuItem);
@@ -48,6 +53,9 @@ public class MenuItemServiceImpl implements MenuItemServiceInt {
             e.printStackTrace();
             return false;
         }
+    }
+    public Optional<List<MenuItem>> findItemsByIds(List<Long> ids) {
+        return menuItemRepository.findAllByIdIn(ids);
     }
 }
 

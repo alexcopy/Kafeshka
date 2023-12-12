@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import java.util.List;
 import java.time.LocalDateTime;
 
 
@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "menu_item")
 public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +37,16 @@ public class MenuItem {
     private String dishType;
     @Column(nullable = false)
     private int cookingTimeSec;
-    @Column(nullable = false)
-    private LocalDateTime orderTime;
+
+    @OneToMany(mappedBy = "menuItem", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt; // Define 'createdAt' field
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now(); // Set current timestamp before persisting the entity
+    }
+
 }

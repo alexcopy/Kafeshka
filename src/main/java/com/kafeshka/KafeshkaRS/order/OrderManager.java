@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class OrderManager {
-    private List<Order> orders;
+    private final List<Order> orders;
     private HashMap<MenuItem, Integer> hashmap;
 
 

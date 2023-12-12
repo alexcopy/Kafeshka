@@ -29,6 +29,9 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "email")
+    private String email;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd") // Adjust the pattern according to your input format
     @Column(name = "date_of_birth")
     private Date dateOfBirth;

@@ -17,7 +17,7 @@ import java.util.List;
 public class OrderScheduler {
 
     private final CookOrderService cookOrderService;
-    private CookingOrderRepo orderRepository;
+    private final CookingOrderRepo orderRepository;
 
 
     // Constructor injection for OrderRepository and CookOrderService

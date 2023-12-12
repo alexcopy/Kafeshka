@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public class DiscountManager {
-    private List<Discount> availableDiscounts;
+    private final List<Discount> availableDiscounts;
 
     public DiscountManager(List<Discount> availableDiscounts) {
         this.availableDiscounts = availableDiscounts;
